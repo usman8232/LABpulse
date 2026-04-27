@@ -14,7 +14,7 @@ export function HostReportsPage() {
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-sm text-slate-500">Operational reporting</p>
-          <h1 className="text-3xl font-semibold text-ink">Reports</h1>
+          <h1 className="text-2xl font-semibold text-ink md:text-3xl">Reports</h1>
         </div>
         <div className="print-hidden flex w-full max-w-md gap-2">
           <input

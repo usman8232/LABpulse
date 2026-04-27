@@ -39,7 +39,7 @@ export function HostDashboardPage() {
     <div className="space-y-6">
       <div>
         <p className="text-sm text-slate-500">Host overview</p>
-        <h1 className="text-3xl font-semibold text-ink">Live Lab Command Center</h1>
+        <h1 className="text-2xl font-semibold text-ink md:text-3xl">Live Lab Command Center</h1>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">

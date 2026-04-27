@@ -20,7 +20,7 @@ export function HostDeviceDetailPage() {
     <div className="space-y-6">
       <div>
         <p className="text-sm text-slate-500">Device detail</p>
-        <h1 className="text-3xl font-semibold text-ink">{device.hostname}</h1>
+        <h1 className="text-2xl font-semibold text-ink md:text-3xl">{device.hostname}</h1>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">

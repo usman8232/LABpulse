@@ -11,7 +11,7 @@ export function HostAlertsPage() {
     <div className="space-y-6">
       <div>
         <p className="text-sm text-slate-500">Monitoring</p>
-        <h1 className="text-3xl font-semibold text-ink">Alerts and Faults</h1>
+        <h1 className="text-2xl font-semibold text-ink md:text-3xl">Alerts and Faults</h1>
       </div>
 
       <div className="grid gap-4">

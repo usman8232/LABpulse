@@ -66,6 +66,39 @@ export function AppShell() {
           transition={{ duration: 0.28, ease: 'easeOut' }}
           className="flex-1 rounded-2xl bg-white p-4 md:p-6"
         >
+          <div className="print-hidden mb-5 flex items-center justify-between gap-3 md:hidden">
+            <div>
+              <p className="text-xs text-slate-500">LABPulse</p>
+              <p className="text-sm font-semibold text-ink">{user?.role === 'HOST' ? 'Host Console' : 'Client Access'}</p>
+            </div>
+            <button
+              onClick={clearSession}
+              className="flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-sm text-slate-600"
+            >
+              <LogOut size={16} />
+              Sign out
+            </button>
+          </div>
+
+          <nav className="print-hidden mb-5 flex gap-2 overflow-x-auto pb-1 md:hidden">
+            {navigation.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === '/host' || item.to === '/client'}
+                className={({ isActive }) =>
+                  cn(
+                    'flex shrink-0 items-center gap-2 rounded-xl border border-slate-100 bg-white px-3 py-2 text-sm font-medium text-slate-500 transition',
+                    isActive && 'border-sky-100 bg-sky-50 text-accent',
+                  )
+                }
+              >
+                <item.icon size={16} />
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+
           <Outlet />
         </motion.main>
       </div>
