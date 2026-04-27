@@ -1,0 +1,3 @@
+export const ROLES = ['HOST', 'CLIENT'];
+export const ALERT_STATUSES = ['NEW', 'ACKNOWLEDGED', 'RESOLVED'];
+export const REGISTRATION_STATUSES = ['PENDING', 'APPROVED', 'REJECTED'];
