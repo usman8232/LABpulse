@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { apiFetch } from '../lib/api';
 
@@ -66,11 +66,16 @@ export function useReports() {
 }
 
 export function useGenerateReport() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (payload) =>
       apiFetch('/reports/generate', {
         method: 'POST',
         body: JSON.stringify(payload),
       }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['reports'] });
+    },
   });
 }
