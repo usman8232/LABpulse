@@ -8,6 +8,7 @@ import { UsageChart } from '../components/dashboard/usage-chart';
 import { Card } from '../components/ui/card';
 import { useAlerts, useDevices } from '../hooks/use-host-data';
 import { useSocket } from '../hooks/use-socket';
+import { getDeviceFreshness } from '../lib/device-status';
 
 export function HostDashboardPage() {
   const queryClient = useQueryClient();
@@ -87,7 +88,7 @@ export function HostDashboardPage() {
               <div key={`${device.hostname}-${index}`} className="rounded-xl bg-slate-50 px-4 py-3">
                 <p className="font-medium text-ink">{device.hostname}</p>
                 <p className="text-sm text-slate-500">
-                  CPU {device.cpuUsage}% | RAM {device.ramUsage}% | {device.isOnline ? 'Online' : 'Offline'}
+                  CPU {device.cpuUsage}% | RAM {device.ramUsage}% | {getDeviceFreshness(device).summary}
                 </p>
               </div>
             ))}
