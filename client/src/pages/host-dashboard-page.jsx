@@ -1,4 +1,5 @@
 import { AlertTriangle, Cpu, MonitorCheck, ServerCog } from 'lucide-react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
 import { DeviceTable } from '../components/dashboard/device-table';
@@ -9,14 +10,22 @@ import { useAlerts, useDevices } from '../hooks/use-host-data';
 import { useSocket } from '../hooks/use-socket';
 
 export function HostDashboardPage() {
+  const queryClient = useQueryClient();
   const [deviceEvents, setDeviceEvents] = useState([]);
   const [alertEvents, setAlertEvents] = useState([]);
   const { data: devicesData } = useDevices();
   const { data: alertsData } = useAlerts();
 
   useSocket(
-    (payload) => setDeviceEvents((current) => [payload, ...current].slice(0, 12)),
-    (payload) => setAlertEvents((current) => [payload, ...current].slice(0, 12)),
+    (payload) => {
+      setDeviceEvents((current) => [payload, ...current].slice(0, 12));
+      void queryClient.invalidateQueries({ queryKey: ['devices'] });
+    },
+    (payload) => {
+      setAlertEvents((current) => [payload, ...current].slice(0, 12));
+      void queryClient.invalidateQueries({ queryKey: ['alerts'] });
+      void queryClient.invalidateQueries({ queryKey: ['devices'] });
+    },
   );
 
   const devices = devicesData?.devices ?? [];

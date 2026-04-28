@@ -10,12 +10,18 @@ export function useRegistrations() {
 }
 
 export function useRegistrationDecision() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: ({ id, approved }) =>
       apiFetch(`/devices/registrations/${id}/decision`, {
         method: 'PATCH',
         body: JSON.stringify({ approved }),
       }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['registrations'] });
+      void queryClient.invalidateQueries({ queryKey: ['devices'] });
+    },
   });
 }
 
@@ -50,11 +56,18 @@ export function useAlerts() {
 }
 
 export function useAlertAction(action) {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (id) =>
       apiFetch(`/monitoring/alerts/${id}/${action}`, {
         method: 'PATCH',
       }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['alerts'] });
+      void queryClient.invalidateQueries({ queryKey: ['devices'] });
+      void queryClient.invalidateQueries({ queryKey: ['device-history'] });
+    },
   });
 }
 
