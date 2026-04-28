@@ -1,0 +1,11 @@
+node_modules
+client/node_modules
+server/node_modules
+agent/node_modules
+dist
+coverage
+.git
+.github
+*.log
+client-dev.log
+server-dev.log

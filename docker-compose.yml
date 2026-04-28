@@ -1,11 +1,43 @@
-version: '3.9'
 services:
   mongo:
     image: mongo:7
+    restart: unless-stopped
     ports:
       - '27017:27017'
     volumes:
       - mongo_data:/data/db
+
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: mongodb://mongo:27017/labpulse
+      JWT_ACCESS_SECRET: change-me-access
+      JWT_REFRESH_SECRET: change-me-refresh
+      ACCESS_TOKEN_TTL: 15m
+      REFRESH_TOKEN_TTL: 7d
+      SERVER_PORT: 4000
+      CLIENT_URL: http://localhost:8080
+      AGENT_SHARED_SECRET: change-me-agent
+    ports:
+      - '4000:4000'
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+      args:
+        VITE_API_URL: /api
+        VITE_SOCKET_URL: ''
+    restart: unless-stopped
+    depends_on:
+      - server
+    ports:
+      - '8080:80'
 
 volumes:
   mongo_data:

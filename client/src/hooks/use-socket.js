@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL ?? 'http://localhost:4000';
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || undefined;
 
 export function useSocket(onDeviceUpdate, onAlertUpdate) {
   useEffect(() => {
-    const socket = io(SOCKET_URL);
+    const socket = SOCKET_URL ? io(SOCKET_URL) : io();
 
     if (onDeviceUpdate) {
       socket.on('device:update', onDeviceUpdate);
