@@ -28,8 +28,9 @@ npm run local
 
 This command:
 - creates missing local `.env` files from the examples
-- starts the LABPulse backend on port `4000`
-- starts the LABPulse frontend on port `5173`
+- starts the LABPulse backend on port `4000` or the next free port
+- starts the LABPulse frontend on port `5173` or the next free port
+- prints the exact local URLs in the terminal
 
 If you want to run the monitoring agent on the same machine too:
 
@@ -55,7 +56,7 @@ This command:
 - builds and serves the LABPulse frontend on port `8080`
 
 ### URLs
-- Local mode web app: [http://localhost:5173](http://localhost:5173)
+- Local mode web app: check the terminal output from `npm run local`
 - Docker mode web app: [http://localhost:8080](http://localhost:8080)
 - Backend health: [http://localhost:4000/health](http://localhost:4000/health)
 

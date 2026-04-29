@@ -93,8 +93,8 @@ export function LoginPage() {
             <div className="mt-6 rounded-2xl bg-slate-50 p-4 text-sm text-slate-500">
               Default accounts:
               <div className="mt-2 space-y-1">
-                <p>`host@labpulse.local / Host12345!`</p>
-                <p>`client@labpulse.local / Client12345!`</p>
+                <p>host@labpulse.local / Host12345!</p>
+                <p>client@labpulse.local / Client12345!</p>
               </div>
             </div>
           </Card>
